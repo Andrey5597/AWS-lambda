@@ -1,0 +1,15 @@
+service: time
+provider:
+  name: aws
+  runtime: python3.8
+functions:
+  load_timer:
+    package:
+      artifact:
+    handler: handler.load_timer
+    events:
+      - http:
+          method: post
+          path: /site_load_timer
+plugins:
+  - serverless-python-requirements
