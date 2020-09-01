@@ -7,7 +7,7 @@ def load_timer(event, context):
     """
         example of request body: ["http://google.com", "http://facebook.com", "any fake url"]
         response : {
-            statysCode: 200
+            statusCode: 200
             "body": {
             'url': 'load_time',
             ...
@@ -17,7 +17,7 @@ def load_timer(event, context):
     try:
         list_of_urls = ast.literal_eval(event.get('body'))
     except Exception:   
-        return json.dumps({"statusCode" : 400})
+        return {"statusCode": 400, "body": json.dumps({"statusCode": 400})}
     body = {}
     for url in list_of_urls:
         try:
@@ -25,7 +25,4 @@ def load_timer(event, context):
             body[url] = time
         except Exception:
             body[url] = 'URL is invalid'
-    return {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
+    return {"statusCode": 200, "body": json.dumps(body)}
