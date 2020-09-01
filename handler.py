@@ -17,7 +17,9 @@ def load_timer(event, context):
     try:
         list_of_urls = ast.literal_eval(event.get('body'))
     except Exception:   
-        return {"statusCode": 400, "body": json.dumps({"statusCode": 400})}
+        return {
+            "statusCode": 400,
+            "body": json.dumps(["Bad request data. There should be a list of urls in POST request body."])}
     body = {}
     for url in list_of_urls:
         try:
